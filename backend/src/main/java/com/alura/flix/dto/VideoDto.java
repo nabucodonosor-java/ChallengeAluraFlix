@@ -3,6 +3,7 @@ package com.alura.flix.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.domain.Page;
 
@@ -14,6 +15,7 @@ public class VideoDto implements Serializable {
 	private Long id;
 
 	@NotBlank
+	@Size(max = 30)
 	private String titulo;
 
 	@NotBlank
