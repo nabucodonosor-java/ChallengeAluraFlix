@@ -23,7 +23,7 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Resource Not Found");
+		err.setError("Recurso não encontrado!");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
@@ -35,7 +35,7 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Database exception");
+		err.setError("Erro no banco de dados");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
@@ -48,8 +48,8 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Erro no cadastro do vídeo");
-		err.setMessage(e.getMessage());
+		err.setError("Erro ao salvar vídeo");
+		err.setMessage("Todos os campos são obrigatórios e não podem estar preenchidos somente com espaços!");
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
@@ -60,8 +60,8 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Título e/ou vídeo já cadastrado(s)");
-		err.setMessage(e.getMessage());
+		err.setError("Erro ao salvar vídeo");
+		err.setMessage("Título e/ou vídeo já cadastrado(s)");
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
