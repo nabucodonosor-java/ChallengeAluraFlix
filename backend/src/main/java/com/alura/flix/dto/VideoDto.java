@@ -15,7 +15,7 @@ public class VideoDto implements Serializable {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 30)
+	@Size(max = 30, message = "Título deve ter no máximo 30 caracteres")
 	private String titulo;
 
 	@NotBlank

@@ -15,6 +15,7 @@ import com.alura.flix.entities.Video;
 import com.alura.flix.repositories.VideoRepository;
 import com.alura.flix.services.exceptions.DatabaseException;
 import com.alura.flix.services.exceptions.ResourceNotFoundException;
+import com.alura.flix.services.exceptions.TitleSizeException;
 
 @Service
 public class VideoService {
@@ -36,12 +37,15 @@ public class VideoService {
 
 	@Transactional
 	public VideoDto insert(VideoDto dto) {
-		Video entity = new Video();
-		copyToEntity(entity, dto);
-
-		entity = repository.save(entity);
-
-		return new VideoDto(entity);
+			
+		try {
+			Video entity = new Video();
+			copyToEntity(entity, dto);
+			entity = repository.save(entity);
+			return new VideoDto(entity);
+		} catch (TitleSizeException e) {
+			throw new TitleSizeException();
+		}
 	}
 
 	@Transactional
