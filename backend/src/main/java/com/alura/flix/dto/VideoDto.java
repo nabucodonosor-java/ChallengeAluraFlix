@@ -2,6 +2,7 @@ package com.alura.flix.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,14 +15,14 @@ public class VideoDto implements Serializable {
 
 	private Long id;
 
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório!")
 	@Size(max = 30, message = "Título deve ter no máximo 30 caracteres")
 	private String titulo;
 
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório!")
 	private String descricao;
 
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório!")
 	private String url;
 	
 	public VideoDto() {}

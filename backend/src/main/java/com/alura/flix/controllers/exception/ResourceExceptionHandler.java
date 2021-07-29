@@ -1,5 +1,6 @@
 package com.alura.flix.controllers.exception;
 
+import java.sql.SQLException;
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import com.alura.flix.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-	
+
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
@@ -27,7 +28,7 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
-	
+
 	@ExceptionHandler(DatabaseException.class)
 	public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -39,15 +40,28 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandardError> illegalArgument(MethodArgumentNotValidException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> illegalArgument(MethodArgumentNotValidException e,
+			HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Erro no tamanho do título");
-		err.setMessage("Título deve ter no máximo 30 caracteres");
+		err.setError("Erro no cadastro do vídeo");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(SQLException.class)
+	public ResponseEntity<StandardError> illegalArgument(SQLException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Título e/ou vídeo já cadastrado(s)");
+		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
