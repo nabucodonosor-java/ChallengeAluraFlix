@@ -37,6 +37,7 @@ public class VideoService {
 
 	@Transactional
 	public VideoDto insert(VideoDto dto) {
+		
 			Video entity = new Video();
 			copyToEntity(entity, dto);
 			entity = repository.save(entity);
