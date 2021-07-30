@@ -65,7 +65,7 @@ public class VideoService {
 			repository.deleteById(id);
 			
 		} catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException("Médico não encontrado!");
+			throw new ResourceNotFoundException("Vídeo não encontrado!");
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Violação no DB");
 		}
