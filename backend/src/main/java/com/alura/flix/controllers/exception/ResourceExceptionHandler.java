@@ -66,7 +66,7 @@ public class ResourceExceptionHandler {
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
 		err.setError("Erro ao salvar vídeo");
-		err.setMessage("Título e/ou vídeo já cadastrado(s)");
+		err.setMessage("Vídeo já cadastrado - Título e/ou URL do vídeo já cadastrado(s)");
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
