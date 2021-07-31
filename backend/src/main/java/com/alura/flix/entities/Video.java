@@ -23,10 +23,8 @@ public class Video implements Serializable {
 	@Column(unique = true)
 	private String titulo;
 
-	@Column(columnDefinition = "TEXT")
 	private String descricao;
 
-	@Column(columnDefinition = "TEXT", unique = true)
 	private String url;
 
 	@ManyToOne

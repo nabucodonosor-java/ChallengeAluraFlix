@@ -11,7 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alura.flix.dto.VideoDetalhesDto;
 import com.alura.flix.dto.VideoDto;
+import com.alura.flix.dto.VideoSaveDto;
 import com.alura.flix.entities.Categoria;
 import com.alura.flix.entities.Video;
 import com.alura.flix.repositories.CategoriaRepository;
@@ -35,28 +37,28 @@ public class VideoService {
 	}
 
 	@Transactional(readOnly = true)
-	public VideoDto findById(Long id) {
+	public VideoDetalhesDto findById(Long id) {
 		Optional<Video> optional = repository.findById(id);
-		return new VideoDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
+		return new VideoDetalhesDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
 	}
 
 	@Transactional
-	public VideoDto insert(VideoDto dto) {
+	public VideoSaveDto insert(VideoSaveDto dto) {
 
 		Video entity = new Video();
 		copyToEntity(entity, dto);
 		entity = repository.save(entity);
-		return new VideoDto(entity);
+		return new VideoSaveDto(entity);
 	}
 
 	@Transactional
-	public VideoDto update(Long id, VideoDto dto) {
+	public VideoSaveDto update(Long id, VideoSaveDto dto) {
 		try {
 			Optional<Video> optional = repository.findById(id);
 			Video entity = optional.get();
 			copyToEntity(entity, dto);
 			entity = repository.save(entity);
-			return new VideoDto(entity);
+			return new VideoSaveDto(entity);
 		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("Vídeo não encontrado!");
 		} catch (NoSuchElementException e) {
@@ -76,7 +78,7 @@ public class VideoService {
 		}
 	}
 
-	private void copyToEntity(Video entity, VideoDto dto) {
+	private void copyToEntity(Video entity, VideoSaveDto dto) {
 
 		entity.setTitulo(dto.getTitulo());
 		entity.setDescricao(dto.getDescricao());
@@ -84,7 +86,7 @@ public class VideoService {
 
 		if (dto.getCategoriaId() == null) {
 			
-			entity.setCategoria(new Categoria(1L, "LIVRE", "#FFF"));
+			entity.setCategoria(new Categoria(1L, "LIVRE", "white"));
 			
 		} else {
 			

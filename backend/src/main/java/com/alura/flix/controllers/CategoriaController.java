@@ -20,52 +20,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.alura.flix.dto.VideoDetalhesDto;
-import com.alura.flix.dto.VideoDto;
-import com.alura.flix.dto.VideoSaveDto;
-import com.alura.flix.services.VideoService;
+import com.alura.flix.dto.CategoriaDto;
+import com.alura.flix.services.CategoriaService;
 
 @RestController
-@RequestMapping("/videos")
-public class VideoController {
-	
+@RequestMapping("/categorias")
+public class CategoriaController {
+
 	@Autowired
-	private VideoService service;
-	
+	private CategoriaService service;
+
 	@GetMapping
-	public ResponseEntity<Page<VideoDto>> findAll(
+	public ResponseEntity<Page<CategoriaDto>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "DESC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy) {
-				
+
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Page<VideoDto> list = service.findAll(pageRequest);
-		
+		Page<CategoriaDto> list = service.findAllPaged(pageRequest);
+
 		return ResponseEntity.ok().body(list);
 
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<VideoDetalhesDto> findById(@PathVariable Long id) {
-		VideoDetalhesDto entity = service.findById(id);
+	public ResponseEntity<CategoriaDto> findById(@PathVariable Long id) {
+		CategoriaDto entity = service.findById(id);
 		return ResponseEntity.ok().body(entity);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<VideoSaveDto> insert(@Valid @RequestBody VideoSaveDto dto) {
-		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(dto.getId()).toUri();
+	public ResponseEntity<CategoriaDto> insert(@Valid @RequestBody CategoriaDto dto) {
+		dto = service.save(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<VideoSaveDto> update(@PathVariable Long id, @Valid @RequestBody VideoSaveDto dto) {
+	public ResponseEntity<CategoriaDto> update(@PathVariable Long id, @Valid @RequestBody CategoriaDto dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.data.domain.Page;
+
 import com.alura.flix.entities.Categoria;
 
 public class CategoriaDto implements Serializable {
@@ -53,6 +55,10 @@ public class CategoriaDto implements Serializable {
 
 	public void setCor(String cor) {
 		this.cor = cor;
+	}
+
+	public static Page<CategoriaDto> converter(Page<Categoria> page) {
+		return page.map(CategoriaDto::new);
 	}
 
 }

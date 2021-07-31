@@ -1,17 +1,14 @@
 INSERT INTO tb_categoria (titulo, cor) VALUES 
-('LIVRE', '#FFF');
+('LIVRE', 'white');
 
 INSERT INTO tb_categoria (titulo, cor) VALUES 
-('MÚSICAS', '#000000');
+('MÚSICAS', 'red');
 
 INSERT INTO tb_categoria (titulo, cor) VALUES 
-('DOCUMENTARIOS', '#FF0000');
+('DOCUMENTÁRIOS', 'black');
 
 INSERT INTO tb_categoria (titulo, cor) VALUES 
-('ESPORTES', '#FFD700');
-
-INSERT INTO tb_categoria (titulo, cor) VALUES 
-('AEROMODELISMO', '#D8BFD8');
+('ESPORTES', 'orange');
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
 ('Guerra Franco-Prussiana', 'A Guerra Franco-Prussiana e a Unificação da Alemanha', 
@@ -41,6 +38,3 @@ INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES
 ('Atlanta 1996 - Prata G. Borges', 'Gustavo Borges - Prata 200 Livre - Atlanta 1996', 
 'https://www.youtube.com/watch?v=VI0GendBIZo', 4);
 
-INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
-('F-16 com 3m', 'Rasantes e pouso de um jato F-16 com 3m de comprimento', 
-'https://www.youtube.com/watch?v=j7cD84UVqbk', 5);

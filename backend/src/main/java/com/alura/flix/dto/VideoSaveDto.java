@@ -2,28 +2,38 @@ package com.alura.flix.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.domain.Page;
 
 import com.alura.flix.entities.Video;
 
-public class VideoDto implements Serializable {
+public class VideoSaveDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
+	@NotBlank(message = "O campo é obrigatório")
+	@Size(max = 30, message = "Título deve ter no máximo 30 caracteres")
 	private String titulo;
 
+	@NotBlank(message = "O campo é obrigatório")
 	private String descricao;
 
+	@NotBlank(message = "O campo é obrigatório")
 	private String url;
 	
-	public VideoDto() {}
+	private Long categoriaId;
 	
-	public VideoDto(Video entity) {
+	public VideoSaveDto() {}
+	
+	public VideoSaveDto(Video entity) {
 		id = entity.getId();
 		titulo = entity.getTitulo();
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
+		categoriaId = entity.getCategoria().getId();
 	}
 
 	public Long getId() {
@@ -58,8 +68,16 @@ public class VideoDto implements Serializable {
 		this.url = url;
 	}
 	
-	public static Page<VideoDto> converter(Page<Video> listVideos) {
-		return listVideos.map(VideoDto::new);
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
+	}
+
+	public static Page<VideoSaveDto> converter(Page<Video> listVideos) {
+		return listVideos.map(VideoSaveDto::new);
 	}
 
 }
