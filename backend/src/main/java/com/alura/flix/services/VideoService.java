@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alura.flix.dto.VideoDto;
+import com.alura.flix.entities.Categoria;
 import com.alura.flix.entities.Video;
+import com.alura.flix.repositories.CategoriaRepository;
 import com.alura.flix.repositories.VideoRepository;
 import com.alura.flix.services.exceptions.DatabaseException;
 import com.alura.flix.services.exceptions.ResourceNotFoundException;
@@ -22,6 +24,9 @@ public class VideoService {
 
 	@Autowired
 	private VideoRepository repository;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
 	@Transactional(readOnly = true)
 	public Page<VideoDto> findAll(PageRequest pageRequest) {
@@ -72,9 +77,18 @@ public class VideoService {
 	}
 
 	private void copyToEntity(Video entity, VideoDto dto) {
+		
 		entity.setTitulo(dto.getTitulo());
 		entity.setDescricao(dto.getDescricao());
 		entity.setUrl(dto.getUrl());
+		
+		Optional<Categoria> optional = categoriaRepository.findById(dto.getCategoriaId());
+		
+		if (optional.isEmpty()) {
+			entity.setCategoria(new Categoria(1L, "LIVRE", "#FFF"));
+		} else {
+			entity.setCategoria(optional.get());
+		}
 	}
 
 }

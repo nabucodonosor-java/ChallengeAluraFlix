@@ -1,55 +1,42 @@
 package com.alura.flix.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_video")
-public class Video implements Serializable {
+@Table(name = "tb_categoria")
+public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(unique = true)
 	private String titulo;
+	
+	@Column(unique = true)
+	private String cor;
 
-	@Column(columnDefinition = "TEXT")
-	private String descricao;
+	@OneToMany(mappedBy = "categoria")
+	private List<Video> videos = new ArrayList<>();
 
-	@Column(columnDefinition = "TEXT", unique = true)
-	private String url;
-
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
-
-	public Video() {
+	public Categoria() {
 	}
 
-	public Video(Long id, String titulo, String descricao, String url, Categoria categoria) {
+	public Categoria(Long id, String titulo, String cor) {
 		this.id = id;
 		this.titulo = titulo;
-		this.descricao = descricao;
-		this.url = url;
-		this.categoria = categoria;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+		this.cor = cor;
 	}
 
 	public Long getId() {
@@ -68,20 +55,16 @@ public class Video implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getCor() {
+		return cor;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setCor(String cor) {
+		this.cor = cor;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public List<Video> getVideos() {
+		return videos;
 	}
 
 	@Override
@@ -100,7 +83,7 @@ public class Video implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Video other = (Video) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
