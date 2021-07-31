@@ -11,10 +11,10 @@ public class CategoriaDto implements Serializable {
 
 	private Long id;
 
-	@NotBlank(message = "Campo título é obrigatório!")
+	@NotBlank(message = "O campo é obrigatório")
 	private String titulo;
 
-	@NotBlank(message = "Campo título é obrigatório!")
+	@NotBlank(message = "O campo é obrigatório")
 	private String cor;
 	
 	public CategoriaDto() {}

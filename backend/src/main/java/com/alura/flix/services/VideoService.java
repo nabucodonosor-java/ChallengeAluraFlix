@@ -82,12 +82,15 @@ public class VideoService {
 		entity.setDescricao(dto.getDescricao());
 		entity.setUrl(dto.getUrl());
 
-		
-		
-		if (entity.getCategoria() == null || dto.getCategoria() == null) {
+		if (dto.getCategoriaId() == null) {
+			
 			entity.setCategoria(new Categoria(1L, "LIVRE", "#FFF"));
+			
 		} else {
-			entity.setCategoria(new Categoria(dto.getCategoria()));
+			
+		Categoria categoria = categoriaRepository.getOne(dto.getCategoriaId());
+		entity.setCategoria(categoria);
+		
 		}
 	}
 }

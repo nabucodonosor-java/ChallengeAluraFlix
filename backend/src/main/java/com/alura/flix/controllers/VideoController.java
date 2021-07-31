@@ -33,8 +33,8 @@ public class VideoController {
 	@GetMapping
 	public ResponseEntity<Page<VideoDto>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "DESC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy) {
 				
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
