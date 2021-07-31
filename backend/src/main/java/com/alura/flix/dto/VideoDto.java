@@ -24,7 +24,7 @@ public class VideoDto implements Serializable {
 	@NotBlank(message = "Campo obrigatório!")
 	private String url;
 	
-	private Long categoriaId;
+	private CategoriaDto categoria;
 	
 	public VideoDto() {}
 	
@@ -33,7 +33,7 @@ public class VideoDto implements Serializable {
 		titulo = entity.getTitulo();
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
-		categoriaId = entity.getCategoria().getId();
+		categoria = new CategoriaDto(entity.getCategoria());
 	}
 
 	public Long getId() {
@@ -68,12 +68,12 @@ public class VideoDto implements Serializable {
 		this.url = url;
 	}
 	
-	public Long getCategoriaId() {
-		return categoriaId;
+	public CategoriaDto getCategoria() {
+		return categoria;
 	}
 
-	public void setCategoriaId(Long categoriaId) {
-		this.categoriaId = categoriaId;
+	public void setCategoria(CategoriaDto categoria) {
+		this.categoria = categoria;
 	}
 
 	public static Page<VideoDto> converter(Page<Video> listVideos) {

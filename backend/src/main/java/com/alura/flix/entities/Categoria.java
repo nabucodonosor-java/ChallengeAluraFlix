@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.alura.flix.dto.CategoriaDto;
+
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria implements Serializable {
@@ -37,6 +39,12 @@ public class Categoria implements Serializable {
 		this.id = id;
 		this.titulo = titulo;
 		this.cor = cor;
+	}
+
+	public Categoria(CategoriaDto dto) {
+		this.id = dto.getId();
+		this.titulo = dto.getTitulo();
+		this.cor = dto.getCor();
 	}
 
 	public Long getId() {

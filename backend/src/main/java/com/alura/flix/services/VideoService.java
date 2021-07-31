@@ -24,7 +24,7 @@ public class VideoService {
 
 	@Autowired
 	private VideoRepository repository;
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
@@ -42,11 +42,11 @@ public class VideoService {
 
 	@Transactional
 	public VideoDto insert(VideoDto dto) {
-		
-			Video entity = new Video();
-			copyToEntity(entity, dto);
-			entity = repository.save(entity);
-			return new VideoDto(entity);
+
+		Video entity = new Video();
+		copyToEntity(entity, dto);
+		entity = repository.save(entity);
+		return new VideoDto(entity);
 	}
 
 	@Transactional
@@ -63,12 +63,12 @@ public class VideoService {
 			throw new ResourceNotFoundException("Vídeo não encontrado!");
 		}
 	}
-	
+
 	public void delete(Long id) {
 		try {
-			
+
 			repository.deleteById(id);
-			
+
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Vídeo não encontrado!");
 		} catch (DataIntegrityViolationException e) {
@@ -77,18 +77,17 @@ public class VideoService {
 	}
 
 	private void copyToEntity(Video entity, VideoDto dto) {
-		
+
 		entity.setTitulo(dto.getTitulo());
 		entity.setDescricao(dto.getDescricao());
 		entity.setUrl(dto.getUrl());
+
 		
-		Optional<Categoria> optional = categoriaRepository.findById(dto.getCategoriaId());
 		
-		if (optional.isEmpty()) {
+		if (entity.getCategoria() == null || dto.getCategoria() == null) {
 			entity.setCategoria(new Categoria(1L, "LIVRE", "#FFF"));
 		} else {
-			entity.setCategoria(optional.get());
+			entity.setCategoria(new Categoria(dto.getCategoria()));
 		}
 	}
-
 }
