@@ -19,7 +19,9 @@ public class VideoDetalhesDto implements Serializable {
 	
 	private Long categoriaId;
 	
-	private String titulocategoria;
+	private String tituloCategoria;
+	
+	private String corCategoria;
 	
 	public VideoDetalhesDto() {}
 	
@@ -29,15 +31,24 @@ public class VideoDetalhesDto implements Serializable {
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
 		categoriaId = entity.getCategoria().getId();
-		titulocategoria = entity.getCategoria().getTitulo();
+		tituloCategoria = entity.getCategoria().getTitulo();
+		corCategoria = entity.getCategoria().getCor();
 	}
 	
-	public String getTitulocategoria() {
-		return titulocategoria;
+	public String getTituloCategoria() {
+		return tituloCategoria;
 	}
 
-	public void setTitulocategoria(String titulocategoria) {
-		this.titulocategoria = titulocategoria;
+	public void setTituloCategoria(String tituloCategoria) {
+		this.tituloCategoria = tituloCategoria;
+	}
+
+	public String getCorCategoria() {
+		return corCategoria;
+	}
+
+	public void setCorCategoria(String corCategoria) {
+		this.corCategoria = corCategoria;
 	}
 
 	public Long getId() {
