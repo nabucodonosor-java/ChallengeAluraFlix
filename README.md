@@ -38,7 +38,8 @@ Http Status: 404 Not Found
 
 **Entidades**\
 ![Web 1](https://personal-bucket-franco.s3.sa-east-1.amazonaws.com/s2.png)\
-Requisições Http\
+**Requisições Http**
+\
 \
 Atender uma requisição GET que exiba todos os categorias com o seguinte endpoint:\
 /categorias\
