@@ -37,24 +37,24 @@ public class CategoriaService {
 
 	@Transactional
 	public CategoriaDto save(CategoriaDto dto) {
-		
+			
 		Categoria entity = new Categoria();
 		copyToEntity(entity, dto);
 		entity = repository.save(entity);
 		return new CategoriaDto(entity);
+		
 	}
 
 	@Transactional
 	public CategoriaDto update(Long id, CategoriaDto dto) {
 		try {
 			
-			// Categoria entity = repository.getOne(dto.getId());
-			
 			Optional<Categoria> optional = repository.findById(id);
 			Categoria entity = optional.get();
 			copyToEntity(entity, dto);
 			entity = repository.save(entity);
 			return new CategoriaDto(entity);
+			
 		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("Categoria não encontrada!");
 		} catch (NoSuchElementException e) {

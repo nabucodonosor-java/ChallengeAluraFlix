@@ -15,6 +15,10 @@ public class FieldMessage implements Serializable {
 		this.fieldName = fieldName;
 		this.message = message;
 	}
+	
+	public FieldMessage(String message) {
+		this.message = message;
+	}
 
 	public String getFieldName() {
 		return fieldName;
