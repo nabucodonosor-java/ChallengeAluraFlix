@@ -60,6 +60,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test-autoconfigure -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test-autoconfigure</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -70,5 +77,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

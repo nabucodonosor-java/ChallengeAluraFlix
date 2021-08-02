@@ -35,6 +35,17 @@ public class VideoDetalhesDto implements Serializable {
 		corCategoria = entity.getCategoria().getCor();
 	}
 	
+	public VideoDetalhesDto(Long id, String titulo, String descricao, String url, Long categoriaId,
+			String tituloCategoria, String corCategoria) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.url = url;
+		this.categoriaId = categoriaId;
+		this.tituloCategoria = tituloCategoria;
+		this.corCategoria = corCategoria;
+	}
+
 	public String getTituloCategoria() {
 		return tituloCategoria;
 	}

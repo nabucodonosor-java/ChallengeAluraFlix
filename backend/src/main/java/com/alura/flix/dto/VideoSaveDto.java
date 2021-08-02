@@ -23,17 +23,26 @@ public class VideoSaveDto implements Serializable {
 
 	@NotBlank(message = "O campo é obrigatório")
 	private String url;
-	
+
 	private Long categoriaId;
-	
-	public VideoSaveDto() {}
-	
+
+	public VideoSaveDto() {
+	}
+
 	public VideoSaveDto(Video entity) {
 		id = entity.getId();
 		titulo = entity.getTitulo();
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
 		categoriaId = entity.getCategoria().getId();
+	}
+
+	public VideoSaveDto(Long id, String titulo,  String descricao, String url, Long categoriaId) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.url = url;
+		this.categoriaId = categoriaId;
 	}
 
 	public Long getId() {
@@ -67,7 +76,7 @@ public class VideoSaveDto implements Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 	public Long getCategoriaId() {
 		return categoriaId;
 	}
