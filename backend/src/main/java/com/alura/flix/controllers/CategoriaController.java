@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.alura.flix.dto.CategoriaDto;
+import com.alura.flix.dto.CategoriaWithVideoDto;
 import com.alura.flix.services.CategoriaService;
 
 @RestController
@@ -47,6 +48,12 @@ public class CategoriaController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaDto> findById(@PathVariable Long id) {
 		CategoriaDto entity = service.findById(id);
+		return ResponseEntity.ok().body(entity);
+	}
+	
+	@GetMapping("/{id}/videos")
+	public ResponseEntity<CategoriaWithVideoDto> findCategoriaWithVideos(@PathVariable Long id) {
+		CategoriaWithVideoDto entity = service.findCategoriaWithVideos(id);
 		return ResponseEntity.ok().body(entity);
 	}
 

@@ -1,14 +1,17 @@
 package com.alura.flix.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.domain.Page;
 
 import com.alura.flix.entities.Categoria;
+import com.alura.flix.entities.Video;
 
-public class CategoriaDto implements Serializable {
+public class CategoriaWithVideoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -19,14 +22,21 @@ public class CategoriaDto implements Serializable {
 	@NotBlank(message = "O campo é obrigatório")
 	private String cor;
 	
-	public CategoriaDto() {}
+	List<VideoGroupedByCategoriaDto> videos = new ArrayList<>();
 	
-	public CategoriaDto(Categoria entity) {
+	public CategoriaWithVideoDto() {}
+	
+	public CategoriaWithVideoDto(Categoria entity) {
 		id = entity.getId();
 		titulo = entity.getTitulo();
 		cor = entity.getCor();
 	}
 
+	public CategoriaWithVideoDto(Categoria entity, List<Video> videos) {
+		this(entity);
+		videos.forEach(video -> this.getVideos().add(new VideoGroupedByCategoriaDto(video)));
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,8 +61,12 @@ public class CategoriaDto implements Serializable {
 		this.cor = cor;
 	}
 	
-	public static Page<CategoriaDto> converter(Page<Categoria> page) {
-		return page.map(CategoriaDto::new);
+	public List<VideoGroupedByCategoriaDto> getVideos() {
+		return videos;
+	}
+
+	public static Page<CategoriaWithVideoDto> converter(Page<Categoria> page) {
+		return page.map(CategoriaWithVideoDto::new);
 	}
 
 }

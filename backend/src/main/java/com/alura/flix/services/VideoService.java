@@ -41,6 +41,12 @@ public class VideoService {
 		Optional<Video> optional = repository.findById(id);
 		return new VideoDetalhesDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
 	}
+	
+	@Transactional(readOnly = true)
+	public Page<VideoDto> findByNome(PageRequest pageRequest, String titulo) {
+		Page<Video> page = repository.findVideoByTitulo(titulo, pageRequest);
+		return page.map(VideoDto::new);
+	}
 
 	@Transactional
 	public VideoSaveDto insert(VideoSaveDto dto) {

@@ -6,37 +6,26 @@ import org.springframework.data.domain.Page;
 
 import com.alura.flix.entities.Video;
 
-public class VideoDto implements Serializable {
+public class VideoGroupedByCategoriaDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
-	private Long categoriaId;
-
 	private String titulo;
 
 	private String descricao;
 
 	private String url;
 	
-	public VideoDto() {}
+	public VideoGroupedByCategoriaDto() {}
 	
-	public VideoDto(Video entity) {
+	public VideoGroupedByCategoriaDto(Video entity) {
 		id = entity.getId();
-		categoriaId = entity.getCategoria().getId();
 		titulo = entity.getTitulo();
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
 	}
 	
-	public Long getCategoriaId() {
-		return categoriaId;
-	}
-
-	public void setCategoriaId(Long categoriaId) {
-		this.categoriaId = categoriaId;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -69,8 +58,8 @@ public class VideoDto implements Serializable {
 		this.url = url;
 	}
 	
-	public static Page<VideoDto> converter(Page<Video> listVideos) {
-		return listVideos.map(VideoDto::new);
+	public static Page<VideoGroupedByCategoriaDto> converter(Page<Video> listVideos) {
+		return listVideos.map(VideoGroupedByCategoriaDto::new);
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alura.flix.dto.CategoriaDto;
+import com.alura.flix.dto.CategoriaWithVideoDto;
 import com.alura.flix.entities.Categoria;
 import com.alura.flix.repositories.CategoriaRepository;
 import com.alura.flix.services.exceptions.DatabaseException;
@@ -33,6 +34,13 @@ public class CategoriaService {
 	public CategoriaDto findById(Long id) {
 		Optional<Categoria> optional = repository.findById(id);
 		return new CategoriaDto(optional.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada!")));
+	}
+	
+	@Transactional(readOnly = true)
+	public CategoriaWithVideoDto findCategoriaWithVideos(Long id) {
+		Optional<Categoria> optional = repository.findById(id);
+		return new CategoriaWithVideoDto(optional.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada!")),
+				optional.get().getVideos());
 	}
 
 	@Transactional
@@ -70,7 +78,7 @@ public class CategoriaService {
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Categoria não encontrada!");
 		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException("Violação no DB");
+			throw new DatabaseException("Violação no DB - Categoria está associada a vídeo(s) cadastrado(s)");
 		}
 	}
 
