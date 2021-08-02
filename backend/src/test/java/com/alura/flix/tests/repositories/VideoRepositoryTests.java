@@ -28,7 +28,7 @@ public class VideoRepositoryTests {
 	long existingId;
 	long nonExistingId;
 	Categoria categoria = CategoriaFactory.createCategoria(100L, "Livre", "white");
-	Video video = VideoFactory.createVideo(1L, "Título Teste", "Descrição Teste", "http://img.com", categoria);
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -67,7 +67,8 @@ public class VideoRepositoryTests {
 	
 	@Test
 	public void saveShouldPersistWithAutoincrementWhenIdIsNull() {
-		video.setId(null);
+		Video video = VideoFactory.createVideo(1L, "Título Teste", "Descrição Teste", "URL_TESTE", new Categoria(1L, "LIVRE", "white"));
+		categoria.setId(null);
 		
 		video = repository.save(video);
 		Optional<Video> result = repository.findById(video.getId());
@@ -79,6 +80,7 @@ public class VideoRepositoryTests {
 	
 	@Test
 	public void saveShouldThrowExceptionWhenVideoAllreadyExist() {
+		Video video = VideoFactory.createVideo(100L, "Título Teste", "Descrição Teste", "http://img.com", categoria);
 		
 		Assertions.assertThrows(Exception.class, () -> {
 			repository.save(video);
