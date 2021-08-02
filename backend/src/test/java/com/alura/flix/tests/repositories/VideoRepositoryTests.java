@@ -12,41 +12,45 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import com.alura.flix.entities.Categoria;
-import com.alura.flix.repositories.CategoriaRepository;
+import com.alura.flix.entities.Video;
+import com.alura.flix.repositories.VideoRepository;
 import com.alura.flix.tests.factory.CategoriaFactory;
+import com.alura.flix.tests.factory.VideoFactory;
 
 @DataJpaTest
-public class CategoriaRepositoryTests {
+public class VideoRepositoryTests {
 	
 	@Autowired
-	private CategoriaRepository repository;
+	private VideoRepository repository;
 	
 	PageRequest pageRequest;
-	int qtdeTotalCategorias;
+	int qtdeTotalVideos;
 	long existingId;
 	long nonExistingId;
+	Categoria categoria = CategoriaFactory.createCategoria(100L, "Livre", "white");
+	Video video = VideoFactory.createVideo(1L, "Título Teste", "Descrição Teste", "http://img.com", categoria);
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		existingId = 1L;
 		nonExistingId = 9999087L;
-		qtdeTotalCategorias = 4;
+		qtdeTotalVideos = 7;
 		pageRequest = PageRequest.of(0,  10);
 	}
 	
 	@Test
-	public void findAllShouldReturnAllCategorias() {
+	public void findAllShouldReturnAllVideos() {
 		
-		Page<Categoria> result = repository.findAll(pageRequest);
+		Page<Video> result = repository.findAll(pageRequest);
 		
 		Assertions.assertFalse(result.isEmpty());
-		Assertions.assertEquals(qtdeTotalCategorias, result.getTotalElements());
+		Assertions.assertEquals(qtdeTotalVideos, result.getTotalElements());
 	}
 	
 	@Test
-	public void findByIdShouldReturnCategoriaWhenIdExists() {
+	public void findByIdShouldReturnVideoWhenIdExists() {
 		
-		Optional<Categoria> optional = repository.findById(existingId);
+		Optional<Video> optional = repository.findById(existingId);
 		
 		Assertions.assertFalse(optional.isEmpty());
 	}
@@ -55,31 +59,29 @@ public class CategoriaRepositoryTests {
 	public void findByIdShouldThrowExceptionWhenIdDoesNotExists() {
 		
 		Assertions.assertThrows(Exception.class, () -> {
-			Optional<Categoria> optional = repository.findById(nonExistingId);
+			Optional<Video> optional = repository.findById(nonExistingId);
 			@SuppressWarnings("unused")
-			Categoria categoria = optional.get();
+			Video video = optional.get();
 		});
 	}
 	
 	@Test
 	public void saveShouldPersistWithAutoincrementWhenIdIsNull() {
-		Categoria categoria = CategoriaFactory.createCategoria(1L, "Livre1", "white1");
-		categoria.setId(null);
+		video.setId(null);
 		
-		categoria = repository.save(categoria);
-		Optional<Categoria> result = repository.findById(categoria.getId());
+		video = repository.save(video);
+		Optional<Video> result = repository.findById(video.getId());
 		
 		Assertions.assertNotNull(result);
 		Assertions.assertTrue(result.isPresent());
-		Assertions.assertSame(result.get(), categoria);
+		Assertions.assertSame(result.get(), video);
 	}
 	
 	@Test
-	public void saveShouldThrowExceptionWhenCategoriaAllreadyExist() {
+	public void saveShouldThrowExceptionWhenVideoAllreadyExist() {
 		
 		Assertions.assertThrows(Exception.class, () -> {
-			Categoria categoria = CategoriaFactory.createCategoria(100L, "Livre", "white");
-			repository.save(categoria);
+			repository.save(video);
 		});
 	}
 	
@@ -87,7 +89,7 @@ public class CategoriaRepositoryTests {
 	public void deleteShouldDeleteObjectWhenIdExists() {
 		repository.deleteById(existingId);
 		
-		Optional<Categoria> result = repository.findById(existingId);
+		Optional<Video> result = repository.findById(existingId);
 		
 		Assertions.assertFalse(result.isPresent());
 	}
