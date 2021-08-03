@@ -25,14 +25,12 @@ public class CategoriaServiceIntegration {
 	@Autowired
 	private CategoriaRepository repository;
 	
-	private long existingId;
 	private long deleteId;
 	private long nonExistingId;
 	private long countTotalCategorias;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		existingId = 1L;
 		deleteId = 5L;
 		nonExistingId = 1000L;
 		countTotalCategorias = 5L;
