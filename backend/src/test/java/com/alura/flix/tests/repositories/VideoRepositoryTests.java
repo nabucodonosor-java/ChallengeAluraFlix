@@ -27,6 +27,8 @@ public class VideoRepositoryTests {
 	int qtdeTotalVideos;
 	long existingId;
 	long nonExistingId;
+	long qtdeTotalVideosSearchFranco;
+	String search;
 	Categoria categoria = CategoriaFactory.createCategoria(100L, "Livre", "white");
 	
 	
@@ -36,6 +38,17 @@ public class VideoRepositoryTests {
 		nonExistingId = 9999087L;
 		qtdeTotalVideos = 7;
 		pageRequest = PageRequest.of(0,  10);
+		search = "franco";
+		qtdeTotalVideosSearchFranco = 1L;
+	}
+	
+	@Test
+	public void findVideoByTituloShouldReturnOneVideoWhenSearchFranco() {
+		
+		Page<Video> result = repository.findVideoByTitulo(search, pageRequest);
+		
+		Assertions.assertFalse(result.isEmpty());
+		Assertions.assertEquals(qtdeTotalVideosSearchFranco, result.getTotalElements());
 	}
 	
 	@Test

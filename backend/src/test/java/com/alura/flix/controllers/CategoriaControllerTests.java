@@ -24,16 +24,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.alura.flix.dto.VideoDto;
-import com.alura.flix.dto.VideoSaveDto;
-import com.alura.flix.services.VideoService;
+import com.alura.flix.dto.CategoriaDto;
+import com.alura.flix.services.CategoriaService;
 import com.alura.flix.services.exceptions.DatabaseException;
 import com.alura.flix.services.exceptions.ResourceNotFoundException;
-import com.alura.flix.tests.factory.VideoFactory;
+import com.alura.flix.tests.factory.CategoriaFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(VideoController.class)
-public class VideoControllerTests {
+@WebMvcTest(CategoriaController.class)
+public class CategoriaControllerTests {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -42,11 +41,10 @@ public class VideoControllerTests {
 	private ObjectMapper objMapper;
 	
 	@MockBean
-	private VideoService service;
+	private CategoriaService service;
 	
-	private PageImpl<VideoDto> page;
-	private VideoDto videoDto;
-	private VideoSaveDto videoSaveDto;
+	private PageImpl<CategoriaDto> page;
+	private CategoriaDto categoriaDto;
 	private long existsId;
 	private long nonExistsId;
 
@@ -59,21 +57,19 @@ public class VideoControllerTests {
 		nonExistsId = 2L;
 		dependentId = 3L;
 		
-		videoDto = VideoFactory.createVideoDto(1L, "Título Teste", "Descrição Teste", "URL Teste");
+		categoriaDto = CategoriaFactory.createCategoriaDto(1L, "Título Teste", "Cor Teste");
 		
-		videoSaveDto = VideoFactory.createVideoSaveDto(1L, "Título Teste", "Descrição Teste", "URL Teste", 1L);
+		page = new PageImpl<>(List.of(categoriaDto));
 		
-		page = new PageImpl<>(List.of(videoDto));
+		when(service.findAllPaged(ArgumentMatchers.any())).thenReturn(page);
 		
-		when(service.findAll(ArgumentMatchers.any())).thenReturn(page);
-		
-		when(service.findById(existsId)).thenReturn(videoDto);
+		when(service.findById(existsId)).thenReturn(categoriaDto);
 		
 		when(service.findById(nonExistsId)).thenThrow(ResourceNotFoundException.class);
 		
-		when(service.insert(ArgumentMatchers.any())).thenReturn(videoSaveDto);
+		when(service.save(ArgumentMatchers.any())).thenReturn(categoriaDto);
 		
-		when(service.update(Mockito.eq(existsId), ArgumentMatchers.any())).thenReturn(videoSaveDto);
+		when(service.update(Mockito.eq(existsId), ArgumentMatchers.any())).thenReturn(categoriaDto);
 		
 		when(service.update(Mockito.eq(nonExistsId), ArgumentMatchers.any())).thenThrow(ResourceNotFoundException.class);
 		
@@ -89,7 +85,7 @@ public class VideoControllerTests {
 	@Test
 	public void deleteShouldReturnNoContentWhenIdExists() throws Exception {
 		
-		ResultActions result = mockMvc.perform(delete("/videos/{id}", existsId)
+		ResultActions result = mockMvc.perform(delete("/categorias/{id}", existsId)
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNoContent());
@@ -98,7 +94,7 @@ public class VideoControllerTests {
 	@Test
 	public void deleteShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 		
-		ResultActions result = mockMvc.perform(delete("/videos/{id}", nonExistsId)
+		ResultActions result = mockMvc.perform(delete("/categorias/{id}", nonExistsId)
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
@@ -108,9 +104,9 @@ public class VideoControllerTests {
 	@Test
 	public void insertSHouldReturnVideoSaveDtoCreated() throws Exception {
 		
-		String jsonBody = objMapper.writeValueAsString(videoSaveDto);
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
 		
-		ResultActions result = mockMvc.perform(post("/videos")
+		ResultActions result = mockMvc.perform(post("/categorias")
 				.content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
@@ -122,9 +118,9 @@ public class VideoControllerTests {
 	@Test
 	public void updateShouldReturnVIdeoSaveDtoWhenIdExists() throws Exception {
 		
-		String jsonBody = objMapper.writeValueAsString(videoSaveDto);
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
 		
-		ResultActions result = mockMvc.perform(put("/videos/{id}", existsId)
+		ResultActions result = mockMvc.perform(put("/categorias/{id}", existsId)
 				.content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
@@ -137,9 +133,9 @@ public class VideoControllerTests {
 	@Test
 	public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() throws Exception {
 		
-		String jsonBody = objMapper.writeValueAsString(videoSaveDto);
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
 		
-		ResultActions result = mockMvc.perform(put("/videos/{id}", nonExistsId)
+		ResultActions result = mockMvc.perform(put("/categorias/{id}", nonExistsId)
 				.content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
@@ -149,13 +145,13 @@ public class VideoControllerTests {
 	
 	@Test
 	public void findAllShouldReturnPage() throws Exception {
-		mockMvc.perform(get("/videos")).andExpect(status().isOk());
+		mockMvc.perform(get("/categorias")).andExpect(status().isOk());
 	}
 	
 	@Test
 	public void findByIdShouldReturnVideoDtoWhenIdExists() throws Exception {
 		
-		ResultActions result = mockMvc.perform(get("/videos/{id}", existsId).accept(MediaType.APPLICATION_JSON));
+		ResultActions result = mockMvc.perform(get("/categorias/{id}", existsId).accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isOk());
 		result.andExpect(jsonPath("$.id").exists());
@@ -164,7 +160,7 @@ public class VideoControllerTests {
 	@Test
 	public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 		
-		ResultActions result = mockMvc.perform(get("/videos/{id}", nonExistsId).accept(MediaType.APPLICATION_JSON));
+		ResultActions result = mockMvc.perform(get("/categorias/{id}", nonExistsId).accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
 	}

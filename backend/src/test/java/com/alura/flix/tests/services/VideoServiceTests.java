@@ -86,6 +86,7 @@ public class VideoServiceTests {
 		
 		verify(repository, times(1)).findById(nonExistsId);
 	}
+	
 	@Test
 	public void findByIdShouldReturnVideoDtoWhenIdExists() {
 		
