@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.alura.flix.dto.VideoDetalhesDto;
 import com.alura.flix.dto.VideoDto;
 import com.alura.flix.dto.VideoSaveDto;
 import com.alura.flix.services.VideoService;
@@ -48,8 +47,8 @@ public class VideoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<VideoDetalhesDto> findById(@PathVariable Long id) {
-		VideoDetalhesDto entity = service.findById(id);
+	public ResponseEntity<VideoDto> findById(@PathVariable Long id) {
+		VideoDto entity = service.findById(id);
 		return ResponseEntity.ok().body(entity);
 	}
 	

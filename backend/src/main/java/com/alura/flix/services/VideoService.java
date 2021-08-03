@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alura.flix.dto.VideoDetalhesDto;
 import com.alura.flix.dto.VideoDto;
 import com.alura.flix.dto.VideoSaveDto;
 import com.alura.flix.entities.Categoria;
@@ -37,9 +36,9 @@ public class VideoService {
 	}
 
 	@Transactional(readOnly = true)
-	public VideoDetalhesDto findById(Long id) {
+	public VideoDto findById(Long id) {
 		Optional<Video> optional = repository.findById(id);
-		return new VideoDetalhesDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
+		return new VideoDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
 	}
 	
 	@Transactional(readOnly = true)

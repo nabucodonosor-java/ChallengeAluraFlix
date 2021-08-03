@@ -22,7 +22,7 @@ public class CategoriaWithVideoDto implements Serializable {
 	@NotBlank(message = "O campo é obrigatório")
 	private String cor;
 	
-	List<VideoGroupedByCategoriaDto> videos = new ArrayList<>();
+	List<VideoDto> videos = new ArrayList<>();
 	
 	public CategoriaWithVideoDto() {}
 	
@@ -34,7 +34,7 @@ public class CategoriaWithVideoDto implements Serializable {
 
 	public CategoriaWithVideoDto(Categoria entity, List<Video> videos) {
 		this(entity);
-		videos.forEach(video -> this.getVideos().add(new VideoGroupedByCategoriaDto(video)));
+		videos.forEach(video -> this.getVideos().add(new VideoDto(video)));
 	}
 	
 	public Long getId() {
@@ -61,12 +61,12 @@ public class CategoriaWithVideoDto implements Serializable {
 		this.cor = cor;
 	}
 	
-	public List<VideoGroupedByCategoriaDto> getVideos() {
+	public List<VideoDto> getVideos() {
 		return videos;
 	}
 
-	public static Page<CategoriaWithVideoDto> converter(Page<Categoria> page) {
-		return page.map(CategoriaWithVideoDto::new);
+	public static Page<CategoriaDto> converter(Page<Categoria> page) {
+		return page.map(CategoriaDto::new);
 	}
 
 }

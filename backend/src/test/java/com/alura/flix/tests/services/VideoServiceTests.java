@@ -23,7 +23,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.alura.flix.dto.VideoDetalhesDto;
 import com.alura.flix.entities.Video;
 import com.alura.flix.repositories.VideoRepository;
 import com.alura.flix.services.VideoService;
@@ -86,6 +85,8 @@ public class VideoServiceTests {
 		verify(repository, times(1)).findById(nonExistsId);
 	}
 	/*
+	 * 
+	 * Está dando NullPointerException
 	@Test
 	public void findByIdShouldReturnVideoDetalhesDtoWhenIdExists() {
 		
@@ -94,7 +95,7 @@ public class VideoServiceTests {
 		Assertions.assertNotNull(result);
 		
 	}
-*/
+	 */
 	@Test
 	public void deleteByIdShouldThrowDatabaseExceptionWhenDependentId() {
 		
