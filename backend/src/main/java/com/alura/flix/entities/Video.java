@@ -48,7 +48,7 @@ public class Video implements Serializable {
 		this.descricao = descricao;
 		this.url = url;
 	}
-
+	
 	public Categoria getCategoria() {
 		return categoria;
 	}
