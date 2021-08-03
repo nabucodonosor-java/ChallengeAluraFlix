@@ -11,7 +11,7 @@ INSERT INTO tb_categoria (titulo, cor) VALUES
 ('ESPORTES', 'orange');
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
-('Guerra Franco-Prussiana', 'A Guerra Franco-Prussiana e a Unificação da Alemanha', 
+('A Guerra Franco-Prussiana', 'A Guerra Franco-Prussiana e a Unificação da Alemanha', 
 'https://www.youtube.com/watch?v=QLuYGxJzNlE&t=242s', 1);
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
@@ -31,7 +31,7 @@ INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES
 'https://www.youtube.com/watch?v=afIat9PtJVk', 3);
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
-('(1987) - Brasil x EUA', 'Jogos Pan-Americanos de Basquete (1987) - Brasil x EUA', 
+('Brasil x EUA Pan (1987)', 'Jogos Pan-Americanos de Basquete (1987) - Brasil x EUA', 
 'https://www.youtube.com/watch?v=Gsxvhia50No&t=4186s', 4);
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
