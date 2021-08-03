@@ -62,4 +62,6 @@ Criar uma rota GET que busque vídeos por nome via query parameters, por exemplo
 **Regras de Negócio**
 * A categoria com ID = 1, deve chamar LIVRE e caso ela não seja especificada na criação do vídeo, vamos atribuir o ID = 1.
 * Uma nova categoria não pode ser criada caso tenha algum campo vazio.
-* Testes de unidade e testes de Integração (modelos e controller).
+* Testes Unitários **(Repositories, Services e Controllers)**
+* Testes de Integração
+
