@@ -12,5 +12,9 @@ public class CategoriaFactory {
 	public static CategoriaDto createCategoriaDto(Long id, String titulo, String cor) {
 		return new CategoriaDto(id, titulo, cor);
 	}
+	
+	public static CategoriaDto createCategoriaDtoAutoIncrementId(String titulo, String cor) {
+		return new CategoriaDto(titulo, cor);
+	}
 
 }

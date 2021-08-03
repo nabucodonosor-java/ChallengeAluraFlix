@@ -10,6 +10,9 @@ INSERT INTO tb_categoria (titulo, cor) VALUES
 INSERT INTO tb_categoria (titulo, cor) VALUES 
 ('ESPORTES', 'orange');
 
+INSERT INTO tb_categoria (titulo, cor) VALUES 
+('YDELETE', 'brown');
+
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES 
 ('A Guerra Franco-Prussiana', 'A Guerra Franco-Prussiana e a Unificação da Alemanha', 
 'https://www.youtube.com/watch?v=QLuYGxJzNlE&t=242s', 1);

@@ -10,9 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alura.flix.dto.VideoDto;
-import com.alura.flix.repositories.VideoRepository;
-import com.alura.flix.services.VideoService;
+import com.alura.flix.dto.CategoriaDto;
+import com.alura.flix.repositories.CategoriaRepository;
+import com.alura.flix.services.CategoriaService;
 import com.alura.flix.services.exceptions.ResourceNotFoundException;
 
 @SpringBootTest
@@ -20,28 +20,30 @@ import com.alura.flix.services.exceptions.ResourceNotFoundException;
 public class CategoriaServiceIntegration {
 	
 	@Autowired
-	private VideoService service;
+	private CategoriaService service;
 	
 	@Autowired
-	private VideoRepository repository;
+	private CategoriaRepository repository;
 	
 	private long existingId;
+	private long deleteId;
 	private long nonExistingId;
-	private long countTotalVideos;
+	private long countTotalCategorias;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		existingId = 1L;
+		deleteId = 5L;
 		nonExistingId = 1000L;
-		countTotalVideos = 7L;
+		countTotalCategorias = 5L;
 	}
 	
 	@Test
-	public void deleteShouldDeleteVideoWhenIdExists() {
+	public void deleteShouldDeleteCategoriaWhenIdExists() {
 		
-		service.delete(existingId);
+		service.delete(deleteId);
 		
-		Assertions.assertEquals(countTotalVideos - 1, repository.count());
+		Assertions.assertEquals(countTotalCategorias - 1, repository.count());
 		
 	}
 	
@@ -52,7 +54,7 @@ public class CategoriaServiceIntegration {
 			service.delete(nonExistingId);
 		});
 		
-		Assertions.assertEquals(countTotalVideos, repository.count());
+		Assertions.assertEquals(countTotalCategorias, repository.count());
 		
 	}
 	
@@ -61,12 +63,12 @@ public class CategoriaServiceIntegration {
 		
 		PageRequest pageRequest = PageRequest.of(0, 10);
 		
-		Page<VideoDto> result = service.findAll(pageRequest);
+		Page<CategoriaDto> result = service.findAllPaged(pageRequest);
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals(0, result.getNumber());
 		Assertions.assertEquals(10, result.getSize());
-		Assertions.assertEquals(countTotalVideos, result.getTotalElements());
+		Assertions.assertEquals(countTotalCategorias, result.getTotalElements());
 	}
 	
 	@Test
@@ -74,7 +76,7 @@ public class CategoriaServiceIntegration {
 		
 		PageRequest pageRequest = PageRequest.of(50, 10);
 		
-		Page<VideoDto> result = service.findAll(pageRequest);
+		Page<CategoriaDto> result = service.findAllPaged(pageRequest);
 		
 		Assertions.assertTrue(result.isEmpty());
 
@@ -85,12 +87,12 @@ public class CategoriaServiceIntegration {
 		
 		PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("titulo"));
 		
-		Page<VideoDto> result = service.findAll(pageRequest);
+		Page<CategoriaDto> result = service.findAllPaged(pageRequest);
 		
 		Assertions.assertFalse(result.isEmpty());
-		Assertions.assertEquals("A Guerra Franco-Prussiana", result.getContent().get(0).getTitulo());
-		Assertions.assertEquals("As 7 Maravilhas - Mundo Antigo", result.getContent().get(1).getTitulo());
-		Assertions.assertEquals("Atlanta 1996 - Prata G. Borges", result.getContent().get(2).getTitulo());
+		Assertions.assertEquals("DOCUMENTÁRIOS", result.getContent().get(0).getTitulo());
+		Assertions.assertEquals("ESPORTES", result.getContent().get(1).getTitulo());
+		Assertions.assertEquals("LIVRE", result.getContent().get(2).getTitulo());
 
 	}
 

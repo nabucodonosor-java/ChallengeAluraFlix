@@ -32,6 +32,11 @@ public class CategoriaDto implements Serializable {
 		this.titulo = titulo;
 		this.cor = cor;
 	}
+	
+	public CategoriaDto(String titulo, String cor) {
+		this.titulo = titulo;
+		this.cor = cor;
+	}
 
 	public Long getId() {
 		return id;
