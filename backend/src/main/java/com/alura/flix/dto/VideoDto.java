@@ -36,6 +36,12 @@ public class VideoDto implements Serializable {
 		this.descricao = descricao;
 		this.url = url;
 	}
+	
+	public VideoDto(String titulo, String descricao, String url) {
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.url = url;
+	}
 
 	public Long getCategoriaId() {
 		return categoriaId;
