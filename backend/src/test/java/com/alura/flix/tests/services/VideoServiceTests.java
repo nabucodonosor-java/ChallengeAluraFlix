@@ -23,6 +23,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.alura.flix.dto.VideoDto;
+import com.alura.flix.entities.Categoria;
 import com.alura.flix.entities.Video;
 import com.alura.flix.repositories.VideoRepository;
 import com.alura.flix.services.VideoService;
@@ -50,7 +52,7 @@ public class VideoServiceTests {
 		existsId = 1L;
 		nonExistsId = 2L;
 		dependentId = 3L;
-		video = VideoFactory.createVideoWithoutCategoria(1L, "Título Teste", "Descrição Teste", "URl teste");
+		video = VideoFactory.createVideo(1L, "Título Teste", "Descrição Teste", "URl teste", new Categoria(1L, "LIVRE", "white"));
 		page = new PageImpl<>(List.of(video));
 		
 		// qdo chamar findAll retonar uma Page
@@ -84,18 +86,15 @@ public class VideoServiceTests {
 		
 		verify(repository, times(1)).findById(nonExistsId);
 	}
-	/*
-	 * 
-	 * Está dando NullPointerException
 	@Test
-	public void findByIdShouldReturnVideoDetalhesDtoWhenIdExists() {
+	public void findByIdShouldReturnVideoDtoWhenIdExists() {
 		
-		VideoDetalhesDto result = service.findById(existsId);
+		VideoDto result = service.findById(existsId);
 		
 		Assertions.assertNotNull(result);
 		
 	}
-	 */
+	
 	@Test
 	public void deleteByIdShouldThrowDatabaseExceptionWhenDependentId() {
 		

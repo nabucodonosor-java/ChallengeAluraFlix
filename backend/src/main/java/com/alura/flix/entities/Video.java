@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.alura.flix.dto.VideoDto;
+
 @Entity
 @Table(name = "tb_video")
 public class Video implements Serializable {
@@ -47,6 +49,16 @@ public class Video implements Serializable {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.url = url;
+	}
+	
+	public Video(VideoDto dto) {
+		
+		id = dto.getId();
+		titulo = dto.getTitulo();
+		descricao = dto.getDescricao();
+		url = dto.getUrl();
+		Long categoriaId = categoria.getId();
+		dto.setCategoriaId(categoriaId);
 	}
 	
 	public Categoria getCategoria() {
