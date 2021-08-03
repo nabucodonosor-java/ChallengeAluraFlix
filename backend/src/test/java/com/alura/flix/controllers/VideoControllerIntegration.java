@@ -1,6 +1,7 @@
 package com.alura.flix.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,10 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alura.flix.dto.VideoDto;
 import com.alura.flix.dto.VideoSaveDto;
 import com.alura.flix.tests.factory.VideoFactory;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -35,7 +34,7 @@ public class VideoControllerIntegration {
 	private long existingId;
 	private long nonExistingId;
 	private long countTotalVideos;
-	private VideoDto videoDto;
+	private VideoSaveDto videoSaveDtoWithoutCategoria;
 	private VideoSaveDto videoSaveDto;
 	
 	@BeforeEach
@@ -44,9 +43,23 @@ public class VideoControllerIntegration {
 		nonExistingId = 1000L;
 		countTotalVideos = 7L;
 		
-		videoDto = VideoFactory.createVideoDtoAutoIncrementId("Título Teste", "Descrição Teste", "URL Teste");
+		videoSaveDtoWithoutCategoria = VideoFactory.createVideoSaveDtoWithoutCategoriaAutoIncrementId("Título Teste", "Descrição Teste", "URL Teste");
 		
 		videoSaveDto = VideoFactory.createVideoSaveDtoAutoIncrementId("Título Teste", "Descrição Teste", "URL Teste", 1L);
+	}
+	
+	@Test
+	public void insertWithoutCategoriaShouldReturnVideoSaveDtoWithCategoriaLivre() throws Exception {
+		
+		String jsonBody = objMapper.writeValueAsString(videoSaveDtoWithoutCategoria);
+		
+		ResultActions result = mockMvc.perform(post("/videos")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+		result.andExpect(jsonPath("$.categoriaId").value(1L));
 	}
 	
 	@Test

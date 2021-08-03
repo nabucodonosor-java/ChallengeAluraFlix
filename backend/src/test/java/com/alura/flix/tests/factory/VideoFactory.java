@@ -19,6 +19,10 @@ public class VideoFactory {
 		return new VideoSaveDto(titulo, descricao, url, categoriaId);
 	}
 	
+	public static VideoSaveDto createVideoSaveDtoWithoutCategoriaAutoIncrementId(String titulo, String descricao, String url) {
+		return new VideoSaveDto(titulo, descricao, url);
+	}
+	
 	public static VideoSaveDto createVideoSaveDto(Long id, String titulo, String descricao, String url, Long categoriaId) {
 		return new VideoSaveDto(id, titulo, descricao, url, categoriaId);
 	}

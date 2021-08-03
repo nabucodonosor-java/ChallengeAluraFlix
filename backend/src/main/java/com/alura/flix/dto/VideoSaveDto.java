@@ -51,6 +51,12 @@ public class VideoSaveDto implements Serializable {
 		this.url = url;
 		this.categoriaId = categoriaId;
 	}
+	
+	public VideoSaveDto(String titulo,  String descricao, String url) {
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.url = url;
+	}
 
 	public Long getId() {
 		return id;
