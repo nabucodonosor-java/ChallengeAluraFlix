@@ -86,5 +86,5 @@ public class VideoDto implements Serializable {
 	public static Page<VideoDto> converter(Page<Video> listVideos) {
 		return listVideos.map(VideoDto::new);
 	}
-
+	
 }

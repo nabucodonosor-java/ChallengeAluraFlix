@@ -31,8 +31,16 @@ public class VideoService {
 
 	@Transactional(readOnly = true)
 	public Page<VideoDto> findAll(PageRequest pageRequest) {
-		Page<Video> listVideos = repository.findAll(pageRequest);
-		return VideoDto.converter(listVideos);
+		Page<Video> pageVideos = repository.findAll(pageRequest);
+		return VideoDto.converter(pageVideos);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<VideoDto> findAllFree(PageRequest pageRequest) {
+		
+		Page<Video> pageVideos = repository.findVideoByTituloFree(pageRequest);
+		
+		return VideoDto.converter(pageVideos);
 	}
 
 	@Transactional(readOnly = true)

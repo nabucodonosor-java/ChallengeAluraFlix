@@ -28,7 +28,7 @@ public class Video implements Serializable {
 	private String descricao;
 
 	private String url;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
