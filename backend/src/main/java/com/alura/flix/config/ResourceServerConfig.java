@@ -47,7 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(USER).hasRole("ADMIN")
+		.antMatchers(USER).hasRole("USER")
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());
