@@ -1,5 +1,6 @@
 package com.alura.flix.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -49,20 +50,6 @@ public class VideoControllerIntegration {
 	}
 	
 	@Test
-	public void insertWithoutCategoriaShouldReturnVideoSaveDtoWithCategoriaLivre() throws Exception {
-		
-		String jsonBody = objMapper.writeValueAsString(videoSaveDtoWithoutCategoria);
-		
-		ResultActions result = mockMvc.perform(post("/videos")
-				.content(jsonBody)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON));
-		
-		result.andExpect(status().isCreated());
-		result.andExpect(jsonPath("$.categoriaId").value(1L));
-	}
-	
-	@Test
 	public void findAllShouldReturnSortedPageWhenSortByTitutlo() throws Exception {
 		
 		ResultActions result = mockMvc.perform(get("/videos?page=0&size=12&sort=titulo&direction=ASC")
@@ -74,6 +61,29 @@ public class VideoControllerIntegration {
 		result.andExpect(jsonPath("$.content[0].titulo").value("A Guerra Franco-Prussiana"));
 		result.andExpect(jsonPath("$.content[1].titulo").value("As 7 Maravilhas - Mundo Antigo"));
 		result.andExpect(jsonPath("$.content[2].titulo").value("Atlanta 1996 - Prata G. Borges"));
+	}
+	
+	@Test
+	public void findByIdShouldReturnIsOkWhenIdExists() throws Exception {
+		
+		ResultActions result = mockMvc.perform(get("/videos/{id}", existingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void insertWithoutCategoriaShouldReturnVideoSaveDtoWithCategoriaLivre() throws Exception {
+		
+		String jsonBody = objMapper.writeValueAsString(videoSaveDtoWithoutCategoria);
+		
+		ResultActions result = mockMvc.perform(post("/videos")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+		result.andExpect(jsonPath("$.categoriaId").value(1L));
 	}
 	
 	@Test
@@ -104,6 +114,15 @@ public class VideoControllerIntegration {
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void deleteShouldDeleteVideoAndReturnNoContentWhenIdExists() throws Exception {
+		
+		ResultActions result = mockMvc.perform(delete("/videos/{id}", existingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNoContent());
 	}
 
 }

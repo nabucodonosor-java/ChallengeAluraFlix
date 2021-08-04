@@ -1,6 +1,8 @@
 package com.alura.flix.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,6 +62,28 @@ public class CategoriaControllerIntegration {
 	}
 	
 	@Test
+	public void findByIdShouldReturnIsOkWhenIdExists() throws Exception {
+		
+		ResultActions result = mockMvc.perform(get("/categorias/{id}", existingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void insertShouldReturnCreated() throws Exception {
+		
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
+		
+		ResultActions result = mockMvc.perform(post("/categorias")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+	}
+	
+	@Test
 	public void updateShouldReturnVideoSaveDtoWhenIdExists() throws Exception {
 		
 		String jsonBody = objMapper.writeValueAsString(categoriaDto);
@@ -87,6 +111,15 @@ public class CategoriaControllerIntegration {
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void deleteShouldReturnNoContentWhenIdExists() throws Exception {
+		
+		ResultActions result = mockMvc.perform(delete("/categorias/{id}", existingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNoContent());
 	}
 
 }
