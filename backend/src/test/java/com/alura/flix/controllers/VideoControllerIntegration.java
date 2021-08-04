@@ -73,6 +73,15 @@ public class VideoControllerIntegration {
 	}
 	
 	@Test
+	public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		
+		ResultActions result = mockMvc.perform(get("/videos/{id}", nonExistingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	public void insertWithoutCategoriaShouldReturnVideoSaveDtoWithCategoriaLivre() throws Exception {
 		
 		String jsonBody = objMapper.writeValueAsString(videoSaveDtoWithoutCategoria);
@@ -84,6 +93,54 @@ public class VideoControllerIntegration {
 		
 		result.andExpect(status().isCreated());
 		result.andExpect(jsonPath("$.categoriaId").value(1L));
+	}
+	
+	@Test
+	public void insertShouldReturnBadRequestWhenVideoAllreadyExist() throws Exception {
+		
+		VideoSaveDto vsDto = VideoFactory.createVideoSaveDtoAutoIncrementId("A Guerra Franco-Prussiana", 
+				"A Guerra Franco-Prussiana e a Unificação da Alemanha", "https://www.youtube.com/watch?v=QLuYGxJzNlE&t=242s", 2L);
+		
+		String jsonBody = objMapper.writeValueAsString(vsDto);
+		
+		ResultActions result = mockMvc.perform(post("/videos")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void insertShouldReturnBadRequestWhenVideoTitleIsMoreThan30Characters() throws Exception {
+		
+		VideoSaveDto vsDto = VideoFactory.createVideoSaveDtoAutoIncrementId("A Guerra Franco-Prussiana XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 
+				"Descrição Teste VideoTitleIsMoreThan30Characters", "xhttps://www.youtube.com/watch?v=QLuYGxJzNlE&t=242s", 2L);
+		
+		String jsonBody = objMapper.writeValueAsString(vsDto);
+		
+		ResultActions result = mockMvc.perform(post("/videos")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void insertShouldReturnBadRequestWhenAnyFieldInVideoIsBlankOrEmpty() throws Exception {
+		
+		VideoSaveDto vsDto = VideoFactory.createVideoSaveDtoAutoIncrementId("    ", 
+				"Descrição Teste VideoTitleIsMoreThan30Characters", "", 2L);
+		
+		String jsonBody = objMapper.writeValueAsString(vsDto);
+		
+		ResultActions result = mockMvc.perform(post("/videos")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isBadRequest());
 	}
 	
 	@Test
@@ -123,6 +180,15 @@ public class VideoControllerIntegration {
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void deleteShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		
+		ResultActions result = mockMvc.perform(delete("/videos/{id}", nonExistingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());
 	}
 
 }

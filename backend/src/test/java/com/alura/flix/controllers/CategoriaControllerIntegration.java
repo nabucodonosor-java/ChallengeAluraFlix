@@ -71,6 +71,15 @@ public class CategoriaControllerIntegration {
 	}
 	
 	@Test
+	public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		
+		ResultActions result = mockMvc.perform(get("/categorias/{id}", nonExistingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	public void insertShouldReturnCreated() throws Exception {
 		
 		String jsonBody = objMapper.writeValueAsString(categoriaDto);
@@ -84,7 +93,37 @@ public class CategoriaControllerIntegration {
 	}
 	
 	@Test
-	public void updateShouldReturnVideoSaveDtoWhenIdExists() throws Exception {
+	public void insertShouldReturnBadRequestWhencategoriaAllreadyExist() throws Exception {
+		
+		CategoriaDto categoriaDto = CategoriaFactory.createCategoriaDtoAutoIncrementId("DOCUMENTÁRIOS", "light-black");
+		
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
+		
+		ResultActions result = mockMvc.perform(post("/categorias")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void insertShouldReturnBadRequestWhenAnyFieldInCategoriaIsBlankOrEmpty() throws Exception {
+		
+		CategoriaDto categoriaDto = CategoriaFactory.createCategoriaDtoAutoIncrementId("  ", "");
+		
+		String jsonBody = objMapper.writeValueAsString(categoriaDto);
+		
+		ResultActions result = mockMvc.perform(post("/categorias")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void updateShouldReturnCategoriaDtoWhenIdExists() throws Exception {
 		
 		String jsonBody = objMapper.writeValueAsString(categoriaDto);
 		
@@ -120,6 +159,15 @@ public class CategoriaControllerIntegration {
 				.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void deleteShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		
+		ResultActions result = mockMvc.perform(delete("/categorias/{id}", nonExistingId)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());
 	}
 
 }
