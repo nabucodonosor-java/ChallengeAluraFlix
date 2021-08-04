@@ -59,9 +59,22 @@ Criar uma rota GET relacionando categorias e videos:\
 Criar uma rota GET que busque vídeos por nome via query parameters, por exemplo:\
 /videos?titulo={ tituloVideo }\
 \
+**Regras de Negócio**\
+\
+A categoria com ID = 1, deve chamar LIVRE e caso ela não seja especificada na criação do vídeo, vamos atribuir o ID = 1.\
+Uma nova categoria não pode ser criada caso tenha algum campo vazio.\
+Testes Unitários **(Repositories, Services e Controllers)** com Junit e Mockito\
+\
+
+### Semana 3 e 4
+
+Nesta semana, o desafio será complementar a API adicionando paginação nas requisições de vídeos e categorias. Além disso, foi solicitado para segurança dos recursos proporcionados pela API, adicionar um método de autenticação. Para finalizar, vamos realizar o deploy da API disponibilizando os recursos para todos.\
+A paginação foi implementanda na primeira semana do desafio assim como deploy que foi realizado no heroku. A autenticação será desenvolvida com o padrão JWT(Json Web Token) utilizando o Spring Security.\
+\
 **Regras de Negócio**
-* A categoria com ID = 1, deve chamar LIVRE e caso ela não seja especificada na criação do vídeo, vamos atribuir o ID = 1.
-* Uma nova categoria não pode ser criada caso tenha algum campo vazio.
-* Testes Unitários **(Repositories, Services e Controllers)**
-* Testes de Integração
+- Adicione nas requisições GET em ambos os modelos, tanto vídeos como categoria uma paginação que retorne 5 itens por página;
+- Para garantir a segurança dos dados, implemente algum tipo de autenticação, para que só os usuários autenticados possam acessar as rotas de GET, POST, PUT e DELETE;\
+**Caso a autenticação não seja válida, retornar uma mensagem informando Não autorizado ou Credenciais inválidas.**\
+**Caso usuário e senha inválido, informar Usuário e senha inválido.**
+- Criar o seguinte endpoint com um número fixo de filmes disponível, sem a necessidade de autenticação: GET /videos/free.
 
