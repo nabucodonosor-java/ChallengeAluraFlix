@@ -10,7 +10,10 @@ Dividido em 4 semanas o desafio requisita o desenvolvimento de uma APIRest de um
 deve permitir ao usuário montar playlists com links para seus vídeos preferidos, separados por categorias. O sistema ágil de desenvolvimento utilizado será o Trello.
 
 No meu caso vou criar um projeto Spring Boot utilizando o Maven como gerenciador de dependências e a linguagem java 11. O DB utilizado será o Postgres e a API será
-hospedada no Heroku.
+hospedada no Heroku. As dependências do spring utilizadas no projeto foram: starter-web, data-jpa, h2, postgresql, validation, test (excluindo as versões antigas), security, oauth2 e commons-io.\
+\
+**Sobre as Mensagens Personalizadas de Erro e Validações:**
+criei a classe ResourceExceptionHandler e anotei com @ControllerAdvice (anotação spring para criar classe que irá monitorar todos as exceções lançadas pelos controllers).
 
 ### Semana 1
 
@@ -20,19 +23,29 @@ hospedada no Heroku.
 #### Cenários de erro na requisição e respectivas respostas http status e Validações
 
 -> GET findById -> id inexistente\
-Http Status: 404 Not Found
+Http Status: 404 Not Found\
+Exceção Lançada: ResourceNotFoundException\
+Mensagem: {{ Recurso }} não encontrado!
 
 -> POST insert / PUT update -> campo em branco\
-Http Status: 400 Bad request
+Http Status: 400 Bad request\
+Exceção Lançada: MethodArgumentNotValidException\
+Mensagem: O campo é obrigatório!
 
 -> POST insert / PUT update -> tamanho do campo título\
-Http Status: 400 Bad request
+Http Status: 400 Bad request\
+Exceção Lançada: MethodArgumentNotValidException\
+Mensagem: Título deve ter no máximo 30 caracteres
 
 -> POST insert / PUT update -> Campo título e/ou url repetido\
-Http Status: 400 Bad request
+Http Status: 400 Bad request\
+Exceção Lançada: SQLException\
+Mensagem: Recurso já cadastrado!
 
 -> DEL deleteById -> id inexistente\
-Http Status: 404 Not Found
+Http Status: 404 Not Found\
+Exceção Lançada: ResourceNotFoundException\
+Mensagem: {{ Recurso }} não encontrado!
 
 ### Semana 2
 
@@ -63,7 +76,7 @@ Criar uma rota GET que busque vídeos por nome via query parameters, por exemplo
 \
 A categoria com ID = 1, deve chamar LIVRE e caso ela não seja especificada na criação do vídeo, vamos atribuir o ID = 1.\
 Uma nova categoria não pode ser criada caso tenha algum campo vazio.\
-Testes Unitários **(Repositories, Services e Controllers)** com Junit e Mockito\
+Testes Unitários **(Repositories, Services e Controllers)** utilizei o Junit5 e Mockito para implementar os testes unitários e de integração\
 \
 
 ### Semana 3 e 4
