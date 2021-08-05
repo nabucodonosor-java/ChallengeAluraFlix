@@ -1,8 +1,9 @@
 # Alura Challenge Backend - Projeto: AluraFlix
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/nabucodonosor-java/ChallengeAluraFlix/blob/main/LICENSE)
 
-
-https://app-alura-flix.herokuapp.com
+https://app-alura-flix.herokuapp.com \
+**username** user@mapin.com \
+**password** alura-flix
 
 ## Sobre o desafio
 
