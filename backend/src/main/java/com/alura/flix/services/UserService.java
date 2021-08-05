@@ -97,10 +97,9 @@ public class UserService implements UserDetailsService {
 		
 		user.getRoles().clear();
 		
-		for (RoleDto roles : dto.getRoles()) {
-			Role role = roleRepository.getOne(roles.getId());
-			user.getRoles().add(role);
-		}
+		Role role = new Role(1L, "ROLE_USER");
+		
+		user.getRoles().add(role);
 	}
 
 	@Override
