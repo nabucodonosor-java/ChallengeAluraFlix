@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,13 +107,12 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 		
 		User user = repository.findByEmail(userEmail);
-		
+
 		if (user == null) {
 			logger.error("Usuário não encontrado!");
-			throw new UsernameNotFoundException("Email not found!");
+			// throw new UsernameNotFoundException("Usuário não encontrado!");
+			throw new InvalidGrantException("Usuario Invalido");
 		}
-		
-		logger.info("Usuário encontrado! " + userEmail);
 		
 		return user;
 	}

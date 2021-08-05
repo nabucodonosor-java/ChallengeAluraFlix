@@ -36,14 +36,6 @@ public class VideoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<VideoDto> findAllFree(PageRequest pageRequest) {
-		
-		Page<Video> pageVideos = repository.findVideoByTituloFree(pageRequest);
-		
-		return VideoDto.converter(pageVideos);
-	}
-
-	@Transactional(readOnly = true)
 	public VideoDto findById(Long id) {
 		Optional<Video> optional = repository.findById(id);
 		return new VideoDto(optional.orElseThrow(() -> new ResourceNotFoundException("Vídeo não encontrado!")));
