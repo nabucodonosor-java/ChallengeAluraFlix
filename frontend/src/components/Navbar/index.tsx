@@ -30,7 +30,7 @@ const Navbar = () => {
               <a href="link">Vídeos</a>
             </li>
             <li>
-              <a href="link">Cadastro</a>
+              <a href="link">Add Vídeo</a>
             </li>
           </ul>
         </div>
