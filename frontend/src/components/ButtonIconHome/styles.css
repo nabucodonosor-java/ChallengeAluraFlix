@@ -1,0 +1,23 @@
+.btn-icon {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    min-height: 100px;
+}
+
+button span {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+button h6 {
+    font-size: 20px;
+}
+
+@media (min-width: 1200px) {
+
+    button h6 {
+        font-size: 30px;
+    }
+}

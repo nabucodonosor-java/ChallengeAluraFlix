@@ -1,5 +1,4 @@
-import MainImage from 'assets/images/main-image.jpg';
-import ButtonIcon from 'components/ButtonIcon';
+import ButtonIconHome from 'components/ButtonIconHome';
 import './styles.css';
 
 const Home = () => {
@@ -11,15 +10,13 @@ const Home = () => {
             <h1>React App Alura Flix</h1>
             <p>
               Interface gráfica desenvolvida em React + TS para consumir API
-              desenvolvida durante o desafio de backend da Alura.
+              desenvolvida durante o desafio de backend da Alura.<br/>
               <strong>#ChallengeAluraBackend</strong>
             </p>
           </div>
-          <ButtonIcon />
+          <ButtonIconHome />
         </div>
-        <div className="home-image-container">
-          <img src={MainImage} alt="imagem" />
-        </div>
+        
       </div>
     </div>
   );
