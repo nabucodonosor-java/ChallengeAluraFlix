@@ -1,7 +1,7 @@
  .video-card {
      margin-bottom: 30px;
      max-width: 290px;
-     max-height: 390px;
+     max-height: 420px;
  }
 
  .card-top-container {
@@ -19,4 +19,5 @@
 .card-bottom-container h6 {
     font-size: 18px;
     color: #263238;
+    margin-bottom: 10px;
 }
