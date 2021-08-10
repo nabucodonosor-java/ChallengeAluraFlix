@@ -2,7 +2,7 @@ import IconFilm from 'assets/images/icon-film.gif';
 
 import './styles.css';
 
-const ButtonIcon = () => { 
+const ButtonIconHome = () => { 
     return (
 
     
@@ -21,4 +21,4 @@ const ButtonIcon = () => {
     );
 }
 
-export default ButtonIcon;
+export default ButtonIconHome;
