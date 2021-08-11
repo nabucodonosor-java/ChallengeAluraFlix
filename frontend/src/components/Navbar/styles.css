@@ -1,5 +1,5 @@
 .nav-logo-text, .nav-logo-text:hover {
-    color: rgb(145, 158, 27);
+    color: rgb(199, 187, 19);
 }
 
 .navbar-main-menu {
@@ -18,7 +18,7 @@
 }
 
 .navbar-main-menu a.active {
-    color: rgb(145, 158, 27);
+    color: rgb(138, 129, 11);
     font-weight: bold;
 }
 

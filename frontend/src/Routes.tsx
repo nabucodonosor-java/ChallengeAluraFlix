@@ -12,10 +12,10 @@ const Routes = () => (
             <Route path="/" exact>
                 <Home />
             </Route>
-            <Route path="/videos">
+            <Route path="/videos" exact>
                 <VideoList />
             </Route>
-            <Route path="/videos:videoId">
+            <Route path="/videos/:videoId">
                 <VideoDetails />
             </Route>
             <Route path="/admin">

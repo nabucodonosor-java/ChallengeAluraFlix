@@ -1,0 +1,40 @@
+.video-details-container {
+    padding: 10px;
+    font-size: 24px;
+}
+
+.video-details-card {
+    padding: 10px;
+    background: url(~assets/images/main-image.jpg);
+}
+
+.goback-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.goback-container h2 {
+    letter-spacing: -0.015em;
+    font-size: 0.8em;
+}
+
+.video-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.video-description h1 {
+    font-size: 1em;
+}
+
+.video-description p {
+    font-size: 0.5em;
+}
+
+.goback-container svg {
+    color: rgb(138, 129, 11);
+    transform: rotate(-180deg);
+    margin: 0 15px 0 5px;
+}
