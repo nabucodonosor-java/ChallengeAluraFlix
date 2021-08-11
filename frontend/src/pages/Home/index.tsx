@@ -1,3 +1,4 @@
+
 import ButtonIconHome from 'components/ButtonIconHome';
 import './styles.css';
 
@@ -14,7 +15,7 @@ const Home = () => {
               <strong>#ChallengeAluraBackend</strong>
             </p>
           </div>
-          <ButtonIconHome />
+          <ButtonIconHome text="CADASTRE-SE JÁ!" />
         </div>
         
       </div>

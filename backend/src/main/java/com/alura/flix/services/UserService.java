@@ -19,7 +19,6 @@ import org.springframework.security.oauth2.common.exceptions.InvalidGrantExcepti
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alura.flix.dto.RoleDto;
 import com.alura.flix.dto.UserDto;
 import com.alura.flix.dto.UserInsertDto;
 import com.alura.flix.dto.UserUpdateDto;
