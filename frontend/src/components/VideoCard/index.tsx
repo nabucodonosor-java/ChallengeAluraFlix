@@ -10,7 +10,7 @@ const VideoCard = ({ video } : Props) => {
     return (
         <div className="base-card video-card">
             <div className="card-top-container">
-                <ReactPlayer url={video.url} height="160px" width="150px"/>
+                <ReactPlayer url={video.url} height="160px" width="150px" />
             </div>
             <div className="card-bottom-container">
                 <h6>{video.titulo}</h6>

@@ -1,15 +1,27 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
+import UserComment from 'components/Comment';
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
+import { Comment } from 'types/comment';
 
 import './styles.css';
 
 const VideoDetails = () => {
+
+  const comment: Comment = {
+    "id": 1,
+    "userName": "Franco Brasil",
+    "text": "A Guerra Franco-Prussiana e a Unificação da Alemanha"
+};
+
   return (
     <div className="video-details-container">
       <div className="video-details-card base-card">
-        <div className="goback-container">
+        <div>
+          <Link to="/videos" className="goback-container">
           <ArrowIcon />
           <h2>VOLTAR</h2>
+          </Link>
         </div>
         <div className="row">
           <div className="col-xl-6">
@@ -29,8 +41,16 @@ const VideoDetails = () => {
             </div>
           </div>
           <div className="col-xl-6">
-            <div className="videos-comments base-card">
+            <div className="videos-comments">
               <h1>Comentários</h1>
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />
+              <UserComment comment={comment} />            
             </div>
           </div>
         </div>
