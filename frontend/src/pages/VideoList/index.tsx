@@ -1,3 +1,4 @@
+import Pagination from 'components/Pagination';
 import VideoCard from 'components/VideoCard';
 import { Video } from 'types/video';
 import './styles.css';
@@ -39,6 +40,9 @@ const VideoList = () => {
         <div className="col-sm-6 col-lg-4 col-xl-3">
           <VideoCard video={video} />
         </div>
+      </div>
+      <div className="row">
+        <Pagination />
       </div>
     </div>
   );
