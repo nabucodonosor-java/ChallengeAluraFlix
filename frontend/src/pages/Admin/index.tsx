@@ -6,7 +6,7 @@ const Admin = () => {
     <div className="admin-container">
       <Navbar />
       <div className="admin-content">
-
+        <h1>Conteúdo</h1>
       </div>
     </div>
   );
