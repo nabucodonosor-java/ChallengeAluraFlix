@@ -1,7 +1,7 @@
  .video-card {
      margin-bottom: 20px;
-     max-width: 290px;
-     max-height: 420px;
+     width: 290px;
+     height: 320px;
  }
 
  .card-top-container {
@@ -14,10 +14,22 @@
 .card-bottom-container {
     padding: 15px 20px 10px 20px;
     text-align: center;
+    min-height: 100px;
 }
 
 .card-bottom-container h6 {
     font-size: 18px;
     color: #263238;
     margin-bottom: 10px;
+}
+
+.card-footer-container {
+    display: flex;
+    padding: 0 10px;
+    justify-content: center;
+}
+
+.card-footer-container p {
+    font-weight: bold;
+    margin-left: 5px;
 }

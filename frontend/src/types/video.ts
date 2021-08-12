@@ -4,4 +4,5 @@ export type Video = {
     descricao: string;
     url: string;
     categoriaId: number;
+    nomeCategoria: string;
 }

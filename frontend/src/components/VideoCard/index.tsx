@@ -2,7 +2,7 @@ import ReactPlayer from 'react-player';
 import { Video } from 'types/video';
 import './styles.css';
 
-type Props = {
+type Props = { 
     video: Video;
 }
 
@@ -14,8 +14,9 @@ const VideoCard = ({ video } : Props) => {
             </div>
             <div className="card-bottom-container">
                 <h6>{video.titulo}</h6>
-                <p>{video.descricao}</p>
-                <p><span>Categoria: </span>{video.categoriaId}</p>
+            </div>
+            <div className="card-footer-container">
+                <span>Categoria:</span><p>{video.nomeCategoria}</p>
             </div>
         </div> 
     );

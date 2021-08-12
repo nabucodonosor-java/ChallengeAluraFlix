@@ -13,6 +13,8 @@ public class VideoDto implements Serializable {
 
 	private Long categoriaId;
 
+	private String nomeCategoria;
+
 	private String titulo;
 
 	private String descricao;
@@ -25,6 +27,7 @@ public class VideoDto implements Serializable {
 	public VideoDto(Video entity) {
 		id = entity.getId();
 		categoriaId = entity.getCategoria().getId();
+		nomeCategoria = entity.getCategoria().getTitulo();
 		titulo = entity.getTitulo();
 		descricao = entity.getDescricao();
 		url = entity.getUrl();
@@ -36,7 +39,7 @@ public class VideoDto implements Serializable {
 		this.descricao = descricao;
 		this.url = url;
 	}
-	
+
 	public VideoDto(String titulo, String descricao, String url) {
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -83,8 +86,16 @@ public class VideoDto implements Serializable {
 		this.url = url;
 	}
 
+	public String getNomeCategoria() {
+		return nomeCategoria;
+	}
+
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
+	}
+
 	public static Page<VideoDto> converter(Page<Video> listVideos) {
 		return listVideos.map(VideoDto::new);
 	}
-	
+
 }

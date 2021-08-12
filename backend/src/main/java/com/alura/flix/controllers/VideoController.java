@@ -35,7 +35,7 @@ public class VideoController {
 	public ResponseEntity<Page<VideoDto>> findAllOrByNome(
 			@RequestParam(value = "titulo", defaultValue = "") String titulo,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "size", defaultValue = "10") Integer size,
+			@RequestParam(value = "size", defaultValue = "12") Integer size,
 			@RequestParam(value = "direction", defaultValue = "DESC") String direction,
 			@RequestParam(value = "sort", defaultValue = "id") String sort) {
 				
@@ -49,7 +49,7 @@ public class VideoController {
 	@GetMapping("/free")
 	public ResponseEntity<Page<VideoDto>> findAllFree() {
 		int page = 0;
-		int size = 3;
+		int size = 8;
 		String sortBy = "id";
 		PageRequest pageRequest = PageRequest.of(page, size, Direction.valueOf("DESC"), sortBy);
 		Page<VideoDto> list = service.findAll(pageRequest);

@@ -1,8 +1,12 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
+import axios from 'axios';
 import UserComment from 'components/Comment';
+import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { BASE_URL } from 'util/request';
 import { Comment } from 'types/comment';
+import { Video } from 'types/video';
 
 import './styles.css';
 
@@ -13,6 +17,21 @@ const VideoDetails = () => {
     "userName": "Franco Brasil",
     "text": "A Guerra Franco-Prussiana e a Unificação da Alemanha"
 };
+
+type UrlParams = {
+  videoId: string;
+}
+
+const { videoId } = useParams<UrlParams>();
+
+const [video, setVideo] = useState<Video>();
+
+useEffect(() => {
+  axios.get(`${BASE_URL}/videos/${videoId}`)
+  .then(response => {
+    setVideo(response.data);
+  });
+}, [videoId]);
 
   return (
     <div className="video-details-container">
@@ -28,15 +47,15 @@ const VideoDetails = () => {
             <div className="video-container">
               <ReactPlayer
                 controls
-                url="https://www.youtube.com/watch?v=QLuYGxJzNlE&t=242s"
+                url={video?.url}
                 width="100%"
               />
             </div>
             <div className="video-description">
-              <h1>A Guerra Franco-Prussiana</h1>
-              <p>A Guerra Franco-Prussiana e a Unificação da Alemanha</p>
+              <h1>{video?.titulo}</h1>
+              <p>{video?.descricao}</p>
               <p>
-                <strong>Categoria:</strong> Animes
+                <strong>Categoria:</strong> {video?.categoriaId}
               </p>
             </div>
           </div>
