@@ -10,7 +10,7 @@ const Routes = () => (
         <Navbar />
         <Switch>
             <Route path="/" exact>
-                <Home />
+               <Home />
             </Route>
             <Route path="/videos" exact>
                 <VideoList />

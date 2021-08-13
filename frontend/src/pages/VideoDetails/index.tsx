@@ -24,7 +24,7 @@ type UrlParams = {
 
 const { videoId } = useParams<UrlParams>();
 
-const [video, setVideo] = useState<Video>();
+const [video, setVideo] = useState<Video>(); 
 
 useEffect(() => {
   axios.get(`${BASE_URL}/videos/${videoId}`)

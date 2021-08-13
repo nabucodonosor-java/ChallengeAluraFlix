@@ -3,13 +3,16 @@
     font-size: 20px;
     text-align: center;
     background: url(~assets/images/main-image.jpg);
+    border: 1px solid green;
+    height: 70vh;
 }
-
+ 
 .home-card {
     display: flex;
     border-radius: 20px;
     flex-direction: column-reverse;
     background: url(~assets/images/main-image.jpg);
+    height: 60vh;
 }
 
 .home-content-container {
@@ -22,19 +25,23 @@
 .home-content-container h1 {
     font-size: 1em;
     width: 260px;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
 }
 
 .home-content-container p {
     font-size: 0.6em;
     width: 260px;
     color: #9E9E9E;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .home-content-container strong {
     font-size: 0.6em;
     font-weight: bold;
+}
+
+.home-content-title {
+    margin: -350px 0 100px 0;
 }
 
 .home-image-container {
@@ -51,6 +58,11 @@
     .home-container {
         padding: 15px;
         font-size: 40px;
+        height: 90vh;
+    }
+
+    .home-card {
+        height: 80vh;
     }
 
     .home-content-container h1 {
@@ -61,6 +73,10 @@
     .home-content-container p {
         width: 506px;
         margin-bottom: 20px;
+    }
+
+    .home-content-title {
+        margin: -350px 0 100px 0;
     }
 
     .home-content-container button {

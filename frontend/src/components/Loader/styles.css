@@ -1,0 +1,40 @@
+.loading-loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF;
+}
+
+.loading-loader img {
+   width: 10vh;
+   height: 80vh;
+}
+
+.loading-loader h6 {
+    font-size: 20px;
+    min-width: 100px;
+    margin-top: 50px;
+}
+
+@media (min-width: 576px) {
+    .loading-loader img {
+        width: 10vh;
+        height: 80vh;
+     }
+}
+
+@media (min-width: 1200px) {
+    
+    .loading-loader img {
+       width: 30vh;
+    }
+    
+    .loading-loader h6 {
+        font-size: 30px;
+        min-width: 250px;
+        margin-top: 50px;
+    }
+
+}
+
