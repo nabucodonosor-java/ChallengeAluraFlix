@@ -65,3 +65,11 @@
         height: 320px;
     }
 }
+
+@media (min-width: 1366px) {
+    .video-card {
+        margin-bottom: 20px;
+        width: 310px;
+        height: 320px;
+    }
+}
