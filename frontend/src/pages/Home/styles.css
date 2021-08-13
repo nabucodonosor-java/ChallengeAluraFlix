@@ -119,6 +119,10 @@
         width: 800px;
         margin-bottom: 47px;
     }
+
+    .home-content-title {
+        margin: 0;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -139,6 +143,10 @@
 
     .home-image-container img {
         width: 100%;
+    }
+
+    .home-content-title {
+        margin: -80px 0 10px 0;
     }
 }
 

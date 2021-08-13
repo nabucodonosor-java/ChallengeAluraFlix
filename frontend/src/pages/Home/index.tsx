@@ -16,7 +16,7 @@ const Home = () => {
         .finally(() => setIsLoading(false));
 }, []);
 
-  return (
+  return ( 
    <>
    {isLoading ? <Loader /> : (
     <div className="home-container">
