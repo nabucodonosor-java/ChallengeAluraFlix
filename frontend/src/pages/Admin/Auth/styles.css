@@ -1,7 +1,9 @@
 .auth-container {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    padding: 20px 20px;
+    background: url(~assets/images/main-image.jpg) repeat;
+    height: 100%;
 }
 
 .auth-banner-container {
@@ -10,6 +12,7 @@
 
 .auth-form-container {
     width: 100%;
+    padding: 15px;
 }
 
 @media (min-width: 576px) {
@@ -25,11 +28,36 @@
     }
 }
 
+@media (min-width: 992px) {
+
+    .auth-form-container {
+        width: 600px;
+    }
+}
+
 @media (min-width: 1200px) {
 
     .auth-banner-container {
         display: flex;
         flex-direction: column;
+        
+        justify-content: center;
+    }
+
+    .auth-banner-container h1 {
+        text-align: center;
+        font-size: 55px;
+    }
+
+    .auth-banner-container p {
+        text-align: center;
+        font-size: 16px;
+        color: #b4adad;
+        margin-bottom: 30px;
+    }
+
+    .auth-banner-container img {
+        border-radius: 50%;
     }
     
    

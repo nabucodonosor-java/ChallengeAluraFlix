@@ -1,5 +1,6 @@
 import AuthImg from 'assets/images/auth-image.png';
 import { Route, Switch } from 'react-router-dom';
+import Login from './Login';
 
 import './styles.css';
 
@@ -15,7 +16,7 @@ const Auth = () => {
       <div className="auth-form-container base-card">
         <Switch>
           <Route path="/admin/auth/login">
-            <h1>Card de Login</h1>
+            <Login />
           </Route>
           <Route path="/admin/auth/cadastro">
             <h1>Card de Cadastro</h1>
