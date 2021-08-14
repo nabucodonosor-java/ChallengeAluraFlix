@@ -4,10 +4,11 @@ import Auth from "pages/Admin/Auth";
 import Home from "pages/Home";
 import VideoDetails from "pages/VideoDetails";
 import VideoList from "pages/VideoList";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Router, Redirect, Route, Switch } from "react-router-dom";
+import history from "util/history";
 
 const Routes = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <Navbar />
         <Switch>
             <Route path="/" exact>
@@ -27,7 +28,7 @@ const Routes = () => (
                 <Admin />
             </Route>
         </Switch>
-    </BrowserRouter>
+    </Router>
 );
 
 export default Routes;
