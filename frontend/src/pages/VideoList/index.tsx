@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Loader from 'components/Loader';
 import Pagination from 'components/Pagination';
 import VideoCard from 'components/VideoCard';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AxiosParams } from 'types/vendor/axios';
 import { SpringPage } from 'types/vendor/spring';
 import { Video } from 'types/video';
 import { BASE_URL } from 'util/request';
@@ -16,9 +15,10 @@ const VideoList = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const params: AxiosParams = {
+    const params : AxiosRequestConfig = {
       method: 'GET',
-      url: `${BASE_URL}/videos/free`,
+      url: '/videos/free',
+      baseURL: BASE_URL,
       params: {
         page: 0, 
         size: 8,
