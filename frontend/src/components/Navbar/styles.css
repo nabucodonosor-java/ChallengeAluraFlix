@@ -26,3 +26,33 @@
     padding-left: 40px;
     min-height: 70px;
 }
+
+.navbar-login-logout {
+    display: none;
+}
+
+.nav-username {
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .navbar-login-logout {
+        display: unset;
+        color: #FFF;
+        margin-right: 40px;
+    }
+
+    .nav-username {
+        display: unset;
+    }
+
+    .navbar-login-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link-login-logout {
+        font-weight: bold;
+    }
+}
