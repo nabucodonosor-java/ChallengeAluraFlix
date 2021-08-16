@@ -1,38 +1,34 @@
 import { NavLink, Link } from 'react-router-dom';
-import { getTokenData, isAuthenticated, TokenData } from 'util/auth';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import { getTokenData, isAuthenticated } from 'util/auth';
+import React, { useContext, useEffect } from 'react';
 import { removeAuthData } from 'util/storage';
 import history from 'util/history';
 
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
-
-type AuthData = {
-  authenticated: boolean;
-  tokenData?: TokenData;
-};
+import { AuthContext } from 'AuthContext';
 
 const Navbar = () => {
-  const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+
+  const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setAuthData({
+      setAuthContextData({
         authenticated: true,
         tokenData: getTokenData(),
       });
     } else {
-      setAuthData({
+      setAuthContextData({
         authenticated: false,
       });
     }
-  }, []);
+  }, [setAuthContextData]);
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     removeAuthData();
-    setAuthData({
+    setAuthContextData({
       authenticated: false,
     });
     history.replace('/');
@@ -77,12 +73,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-login-logout">
-          {authData.authenticated ? (
+          {authContextData.authenticated ? (
             <div className="navbar-login-content">
               <Link className="nav-link-login-logout" to="#logout" onClick={handleLogoutClick}>
                 LOGOUT
               </Link>
-              <span className="nav-username">{authData.tokenData?.user_name}</span>
+              <span className="nav-username">{authContextData.tokenData?.user_name}</span>
             </div>
           ) : (
             <Link className="nav-link-login-logout" to="/admin/auth/login">LOGIN</Link>
